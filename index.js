@@ -4,20 +4,24 @@ const port = 8080;
 
 app.use(express.json());
 
+// middleware for logging time
 function logTime(req, res, next) {
     let date = new Date();
     console.log(date.toLocaleTimeString());
     next();
 }
 
+// GET - / - returns a greeting
 app.get('/', logTime, (request, response) => {
     response.send('Hey Joe!');
 })
 
+// GET - /hello - returns a greeting
 app.get('/hello', logTime, (req, res) => {
     res.send('now Im restarting with alex');
 })
 
+// GET - /api/v1/health - shows API is healthy
 app.get('/api/v2/health', (req, res) => {
     res.send('I am healthy!');
 })
